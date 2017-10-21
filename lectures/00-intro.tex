@@ -1,0 +1,102 @@
+%!TEX root = ../main.tex
+\section{Ouverture: what is formal category theory} The language of category
+theory is built upon a certain number of fundamental notions: among these we
+find the universal characterization of co/limits, the definition of adjunction,
+(pointwise) Kan extension, and the theory of monads.
+
+It is possible to `axiomatize' these definitions, pretending that they
+refer to the 1- and 2-cells of a generic 2-category other than $\Cat$. This
+conceptualization is one of the pillars upon which category theory is done: in
+some sense, category theory arises when the way in which abstract patterns
+interact becomes itself an object of study, and when it is generalized to
+several different contexts. In a few words, the aim
+of \emph{formal category theory} is to provide a framework in which this process
+can be outlined mathematically. Quoting the introduction of \cite{Gray}, that is 
+one of the pillars on which the subject is founded,
+\begin{quotation} The purpose of category theory is to try to describe certain
+general aspects of the structure of mathematics. Since category theory is also
+part of mathematics, this categorical type of description should apply to it as
+well as to other parts of mathematics. [\dots\unkern]
+\end{quotation} The basic idea is that the category of small categories, $\Cat$,
+is a 2-category with properties in the same way $\Set$ is a category with properties. 
+The aim of formal category theory is to outline these properties, and the assumptions
+needed to ensure that a certain 2-category behaves like $\Cat$ in some or some other respects.
+
+Unfortunately, being too na\"ive when performing this process doesn't always
+give the `right' answer (by which we mean that it doesn't always build an object
+with the right universal property), or at least it doesn't give the right answer in the same
+straightforward way in which some categories of algebraic structures can be defined starting
+from the category of $\Sets$.
+
+This is ultimately due to the fact that, when moving to the setting of
+$\clV$-enriched categories (which is the adjacent step of abstraction from
+$\Cat =\Set$-$\Cat$) the theory `behaves differently' in various ways, and some of these
+differences prevent $\clV$-categories to be as expressive as one would have
+liked it to be (a paradigmatic example of this minor expressivity is the lack of
+a \emph{Grothendieck construction} for generic $\clV$-presheaves: seeing how the
+Grothendieck construction, a certain rule to relate `presheaves on $B$' and
+`fibrations over $B$', ultimately pertains to formal category theory has been
+one of the purposes of the early literature on the subject, see
+\cite{StreetFibreYoneda1974,street1978yoneda,street1980fibrations}).
+
+The major problem is that the 2-category $\clV\text{-}\Cat$ often doesn't give
+enough information about the $\clV$-valued hom-functors in a 2-category. Formal
+category theory can be thought as a way to encode the same amount of
+information in various other ways: even though it is always possible to do some
+constructions by mimicking definitions from $\Cat$ (adjunctions and
+adjoint equivalences, extensions by universal 2-cells, \etc), things get a
+little hairy when we want to provide the theory with an analogue of a very useful
+and basic result as the Yoneda lemma.
+
+In the 2-category $\Cat$, we can use a lax limit construction to ``revert''
+set-valued functors on an object $B$ into arrows ``over'' $B$ (we basically glue
+together a bunch of fibers $\coprod_b E_b$ projecting onto $B$, in the same
+manner we build the étale space of a presheaf $F : B^\opp \to \Set$); in the
+2-category $\Cat$ the comma object of $b : 1 \to B$ to $1_B : B \to B$ together
+with its projection $b/B \to B$ is a good stand in for the covariant functor
+represented by $B$ (more generally, \emph{discrete left fibrations} over $B$
+stand in for general functors $B \to \Set$).
+
+In the 2-category $\clV\text{-}\Cat$, we care about $\clV$-valued
+$\clV$-functors and we would like to do the same construction there. But for an
+object $b$ in a $\clV$-enriched category $B$, the comma $b/B$ is more naturally
+an \emph{internal} category (whose object of objects is $\coprod_{x \in B}
+B(b,x)$) rather than an \emph{enriched} one (whose objects are morphisms $b \to
+x$ in the underlying category of $B$). We have to ensure that the codomain
+projection $\clV$-functor $b/B \to B$ from the enriched version of the comma has
+a fibration-like properties, and this leaves us with the fundamental problem of
+formal category theory: \emph{which additional structure on a 2-category $\clK$ allows to
+recognize arrows of $\clK$ playing the same r\^ole of discrete fibrations in
+$\Cat$, thus providing with a meaningful notion of Yoneda lemma internal to
+$\clK$?} 
+
+It has been in the middle age of southern-emisphere category theory that a
+certain number of ways to describe such extra structures have been invented: the
+aim of this first chapters is to give a brief account about three (not unrelated)
+such attempts. At the moment of writing we count
+\subsection{Street and Walters' ``Yoneda structures''} The definition of Yoneda
+structure given by Street revolves around the possibility to give a formal
+counterpart of the Yoneda embedding $\yon \colon A \to \P A$ with its universal
+property. This axiomatization is based on the centrality of the Yoneda lemma
+`internal' to a 2-category $\clK$, that has been defined in a fairly
+heavy-handed way in Street's previous \cite{StreetFibreYoneda1974}. One of the
+main achievements of the subsequent \cite{street1978yoneda} is to obtain an
+elegant and concise axiomatization stemming almost completely from universal
+properties.
+\subsection{Street's ``fibrational cosmoi''} A particular case of Yoneda
+structures, where you ask the pseudo-functor $\P : \clK^\coop \to \clK$
+characterizing a Yoneda structure to be a right 2-adjoint.
+\subsection{Wood's ``proarrow equipments''} A different and more powerful
+perspective, where you embed $\clK$ into a second 2-category $\clK^\star$ with a
+2-functor $(\firstblank)_* : \clK \to \clK^\star$, which is the identity on
+objects and mimicks the behaviour of the embedding $\Cat \to \cate{Prof}$, asking
+that
+\begin{itemize}
+ 	\item the 2-functor $(\firstblank)_*$ is locally fully faithful;
+ 	\item for each 1-cell $f : A \to B$ in $\clK$, every $f_*$ admits a right
+adjoint in $\clK^\star$.
+ \end{itemize} (See \cite{benabou2000distributors,cofriend} for a thorough
+account of the theory of profunctors; since the request that $(\firstblank)_*$
+is the identity on objects is a bit of an evil one, the paper
+\cite{wood1985proarrows} gives the 2-functors satisfying only the other two
+axioms the name of \emph{pro-equipments}).

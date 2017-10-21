@@ -1,0 +1,13 @@
+\documentclass{standalone}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{tikz-cd}
+\begin{document}
+\begin{tikzcd}[column sep=huge,row sep=huge]
+	&b \ar[d,"g"{name=g1}] \\ b \ar[r, "g"'{name=g2}] \ar[ur, bend
+left=60,-,"1"{name=codeps}]\ar[ur, "fg"'{name=domeps}] & a \ar[Rightarrow,
+from=domeps, to=codeps, shorten <=2mm, shorten >=2mm, "\epsilon"]
+\ar[Rightarrow, shorten <=2mm, shorten >=2mm, "\eta*g", near start, from=g2,
+to=g1]
+\end{tikzcd}
+\end{document}
+

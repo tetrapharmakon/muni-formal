@@ -1,0 +1,160 @@
+\setlist[1]{itemsep=0pt}
+
+\renewcommand{\textbf}[1]{\text{\fontseries{b}\selectfont{\upshape #1}}}
+
+\newcommand{\arXivPreprint}[1]{arXiv preprint \href{http://arxiv.org/abs/#1}{arXiv:#1}}
+
+\newtheoremstyle{reference}%
+   {}
+   {}
+   {}                      % Font del testo
+   {}                      % Rientro margini
+   {\bfseries}             % Font del titolo dell'ambiente
+   {:}                     % Punteggiatura dopo "Teorema"\"Definizione"
+   {.2em}                  % Spazio tra titolo e testo.
+   {\thmname{#1}           % #1 : Definizione\Teorema\ecc
+    \thmnumber{#2}         % #2 : Contatore
+    \thmnote{{\sc [#3]}}}  % #3 : Testo tra "[" e "]"
+
+\theoremstyle{reference}
+  \newtheorem{theorem}{Theorem}[section]
+  \newtheorem{conjec}[theorem]{Conjecture}
+  \newtheorem{corollary}[theorem]{Corollary}
+  \newtheorem{counterex}[theorem]{Counterexample}
+  \newtheorem{definition}[theorem]{Definition}
+  \newtheorem{example}[theorem]{Example}
+  \newtheorem{exercise}[theorem]{Exercise}
+  \newtheorem{lemma}[theorem]{Lemma}
+  \newtheorem{notat}[theorem]{Notation}
+  \newtheorem{proposition}[theorem]{Proposition}
+  \newtheorem{question}[theorem]{Question}
+  \newtheorem{remark}[theorem]{Remark}
+  \newtheorem{scholium}[theorem]{Scholium}
+  \newtheorem{setting}[theorem]{Setting}
+  \newtheorem{conjecture}[theorem]{Conjecture}
+  % starred
+  \newtheorem*{conjec*}{Conjecture}
+  \newtheorem*{corollary*}{Corollary}
+  \newtheorem*{counterex*}{Counterexample}
+  \newtheorem*{definition*}{Definition}
+  \newtheorem*{example*}{Example}
+  \newtheorem*{exercise*}{Exercise}
+  \newtheorem*{lemma*}{Lemma}
+  \newtheorem*{notat*}{Notation}
+  \newtheorem*{proposition*}{Proposition}
+  \newtheorem*{question*}{Question}
+  \newtheorem*{remark*}{Remark}
+  \newtheorem*{scholium*}{Scholium}
+  \newtheorem*{setting*}{Setting}
+  \newtheorem*{theorem*}{Theorem}
+
+% ########################################
+% ALCUNE COSE VANNO SEMPRE IN FONDO
+
+\hypersetup{%
+  pdftoolbar=   true,
+  pdfmenubar=   true,
+  pdffitwindow= true,
+  % pdftitle=     {},
+  % pdfauthor=    {},
+  colorlinks=   true,
+  linkcolor=    black,
+  citecolor=    blue!40!black}
+
+
+% \cite e \ref in bold
+\makeatletter
+  \def\@cite#1#2{[\textbf{#1}\if@tempswa , #2\fi]}
+  \def\@biblabel#1{[\textsf{#1}]}
+\makeatother
+\providecommand{\refbf}[1]{\textbf{\ref{#1}}}
+
+% abbreviazioni
+\providecommand{\abbrv}[1]{#1.\@\xspace}
+  \providecommand{\ie}{\abbrv{i.e}}
+  \providecommand{\etc}{\abbrv{etc}}
+  \providecommand{\prof}{\abbrv{prof}}
+  \providecommand{\viz}{\abbrv{viz}}
+  \providecommand{\eg}{\abbrv{e.g}}
+  \providecommand{\achap}{\abbrv{Ch}}
+  \providecommand{\adef}{\abbrv{Def}}
+  \providecommand{\acor}{\abbrv{Cor}}
+  \providecommand{\aprop}{\abbrv{Prop}}
+  \providecommand{\athm}{\abbrv{Thm}}
+
+
+\newlength{\seplen}
+\setlength{\seplen}{5pt}
+%
+\newlength{\sepwid}
+\setlength{\sepwid}{.4pt}
+%
+\def\firstblank{\,\rule{\seplen}{\sepwid}\,}
+\def\secondblank{\firstblank\llap{\raisebox{2pt}{\firstblank}}}
+
+\setcounter{tocdepth}{1}
+
+\newcommand{\mailto}[1]{\href{mailto:#1}{\sf #1}}
+\newcommand{\comment}[1]{\todo[inline,caption={}]{\textbf{Someone says} : #1}}
+
+% REMOVE THIS TO GET BACK AMSART HEADERS ========
+% \pagestyle{fancy}
+% \chead{\texttt{\tiny \color{red}\input{version} : \today \hfill\currenttime}}
+% \lhead{}
+% \rhead{}
+% \cfoot{}%{\texttt{\tiny \color{red}\input{version} : \today \hfill\currenttime}}
+% \lfoot[\thepage]{}
+% \rfoot[]{\thepage}
+
+
+%======= axiom env ==============
+
+\usepackage[framemethod=TikZ]{mdframed}
+
+\tikzstyle{title} =
+    [draw=lightgray, thin, fill=lightgray,% 
+        text=black, rectangle,  
+        right, minimum height=.4cm]
+
+\newcounter{axiom}
+\renewcommand*\theaxiom{Axiom~\arabic{axiom}}
+\makeatletter
+\mdfdefinestyle{axiomstyle}{%
+    leftmargin=1em,%
+    rightmargin=1em,%
+    middlelinewidth=1.2pt,%
+    roundcorner=5pt,%
+    linecolor=lightgray,%
+    backgroundcolor=lightgray!20,%
+    skipabove=1.6em, innertopmargin=1.6em,
+    skipbelow=1em,%
+    frametitlefont=\sffamily\bfseries,%
+    settings={\global\stepcounter{axiom}},%
+    singleextra={%
+    \useasboundingbox (P) rectangle (P);
+        \node[title,xshift=1cm] at (P-|O) %
+            {\mdf@frametitlefont{\theaxiom}~};},%
+    firstextra={%
+    \useasboundingbox (P) rectangle (P);
+            \node[title,xshift=1cm] at (P-|O) %
+                    {~\mdf@frametitlefont{\theaxiom}~};},
+}
+\makeatother
+\newenvironment{axiom}%
+{\begin{mdframed}[style=axiomstyle]}{\end{mdframed}}
+
+\makeatletter
+\def\@settitle{\begin{center}%
+  \baselineskip14\p@\relax
+  \bfseries
+  \uppercasenonmath\@title
+  \@title
+  \ifx\@subtitle\@empty\else
+     \\[1ex]\uppercasenonmath\@subtitle
+     \footnotesize\mdseries\@subtitle
+  \fi
+  \end{center}%
+}
+\def\subtitle#1{\gdef\@subtitle{#1}}
+\def\@subtitle{}
+\makeatother

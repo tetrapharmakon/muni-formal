@@ -1,0 +1,50 @@
+FCT and  HoTT  @MUNI -*- mode: org -*-
+
+This is the schedule of a reading course held at Masaryk University on the topics
+of formal category theory and oo-cosmoi (a la Riehl-Verity).
+More informations about the Mathematics can be found on [[http://www.math.muni.cz/~loregianf/][my personal page]].
+
+All seminars are held at MU Mathematics department, room MS1
+
+-- Fosco Loregian
+
+* TODO Introductory stuff on YS & equipments    
+
+
+** DONE L1/F : Yoneda structures on 2-categories
+   SCHEDULED: <2017-10-18 mer>
+** TODO L3/S : Proarrows I and II
+   SCHEDULED: <2017-11-01 Wed>
+
+** TODO L5/F : Fibrations on 2-categories and bicategories
+   SCHEDULED: <2017-11-15 Wed>
+
+** TODO L7/S : Infinity category theory from scratch    
+   SCHEDULED: <2017-11-29 Wed>
+
+* TODO oo-cosmoi
+
+
+** TODO L9/F :  The 2-category theory of quasi-categories    
+   SCHEDULED: <2017-12-13 Wed>
+
+** TODO L11/S : Homotopy coherent adjunctions and the formal theory of monads I    
+   SCHEDULED: <2018-01-10 Wed>
+  
+** TODO L13/F : Homotopy coherent adjunctions and the formal theory of monads II
+   SCHEDULED: <2018-01-24 Wed>
+
+** TODO L15/S : Completeness results for quasi-categories of algebras, homotopy limits, and related general constructions
+   SCHEDULED: <2018-02-07 Wed>
+
+** TODO L17/F : Fibrations and Yoneda's lemma in an ∞-cosmos
+   SCHEDULED: <2018-02-21 Wed>
+
+** TODO L19/S : Kan extensions and the calculus f modules for ∞-categories I
+   SCHEDULED: <2018-03-07 Wed>
+
+** TODO L21/F : Kan extensions and the calculus of modules for ∞-categories II 
+   SCHEDULED: <2018-03-21 Wed>
+   
+** TODO L23/S : A type theory for synthetic ∞-categories
+   SCHEDULED: <2018-04-04 Wed>

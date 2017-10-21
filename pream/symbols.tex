@@ -1,0 +1,109 @@
+\def\mho{\rotatebox[origin=c]{180}{$\Omega$}}
+
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\psh}{PSh}
+
+\DeclareMathOperator{\colim}{colim}
+
+\DeclareMathOperator{\holim}{holim}
+\DeclareMathOperator{\hocolim}{hocolim}
+
+\def\Fun{\textsf{Fun}}
+\def\Nat{\textsf{Nat}}
+\def\PsNat{\textsf{PsNat}}
+\def\LNat{\textsf{LNat}}
+
+\usepackage{CJKutf8}
+	\newcommand{\yon}{\text{\begin{CJK}{UTF8}{min}よ\end{CJK}}\!}
+
+\DeclareMathAlphabet\EuScript{U}{eus}{m}{n}
+\SetMathAlphabet\EuScript{bold}{U}{eus}{b}{n}
+
+\usepackage{xparse}
+
+\ExplSyntaxOn
+\NewDocumentCommand{\makeabbrev}{mmm}
+ {
+  \yoruk_makeabbrev:nnn { #1 } { #2 } { #3 }
+ }
+
+\cs_new_protected:Npn \yoruk_makeabbrev:nnn #1 #2 #3
+ {
+  \clist_map_inline:nn { #3 }
+   {
+    \cs_new_protected:cpn { #2 } { #1 { ##1 } }
+   }
+ }
+\ExplSyntaxOff
+
+\makeabbrev{\textbf}{bd#1}{b,c,d,e,g,h,i,j,k,l,m,n,o,p,q,r,t,u,v,w,x,y,z,B,C,D,E,G,H,I,J,K,L,M,N,O,P,Q,R,T,U,V,W,X,Y,Z}
+
+\makeabbrev{\textsf}{sf#1}{a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,%
+                           A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z}
+
+\makeabbrev{\mathfrak}{fk#1}{a,b,c,d,e,f,g,h,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,%
+                             A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z}
+
+\makeabbrev{\mathcal}{cl#1}{A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z}
+\makeabbrev{\mathbb}{bb#1}{A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z}
+
+\def\Fun{\mathrm{Fun}}
+\def\Func{\Fun}
+\def\bDelta{\boldsymbol{\Delta}}
+\def\iC {\EuScript{C}}
+
+
+\newcommand{\xto}[1]{\xrightarrow{#1}}
+\newcommand{\xot}[1]{\xleftarrow{#1}}
+\newcommand{\To}{\Rightarrow}
+
+\newcommand{\Nearrow}{\rotatebox[origin=c]{45}{$\Rightarrow$}}  % ↗
+\newcommand{\Nwarrow}{\rotatebox[origin=c]{135}{$\Rightarrow$}} % ↖ 
+\newcommand{\Searrow}{\rotatebox[origin=c]{-45}{$\Rightarrow$}} % ↘
+\newcommand{\Swarrow}{\rotatebox[origin=c]{225}{$\Rightarrow$}} % ↙
+\newcommand{\Sarrow}{\rotatebox[origin=c] {-90}{$\Rightarrow$}}
+\newcommand{\Narrow}{\rotatebox[origin=c] {90}{$\Rightarrow$}}
+
+\usepackage{turnstile}
+	\newcommand{\adjunct}[2]{\nsststile{#2}{#1}}
+
+\def\opp{\text{op}}
+\def\co{\text{co}}
+\def\coop{\text{coop}}
+\def\rift{\text{rift}}
+\def\leeft{\text{lift}} % `lift is already something!
+\def\lan{\text{lan}}
+\def\ran{\text{ran}}
+%
+\def\Rift{\text{Rift}}
+\def\Lift{\text{Lift}}
+\def\Ran{\text{Ran}} 
+\def\Lan{\text{Lan}}
+%
+\def\RIFT{\textsc{rift}}
+\def\LIFT{\textsc{lift}}
+\def\RAN{\textsc{ran}}
+\def\LAN{\textsc{lan}}
+
+\def\cate#1{\textbf{#1}}
+	\def\Set{\cate{Set}}
+	\def\Sets{\Set}
+	\def\Top{\cate{Top}}
+	\def\Cat{\cate{Cat}}
+	\def\Grp{\cate{Grp}}
+	\def\Pos{\cate{Pos}}
+	\def\Ab{\cate{Ab}}
+	\def\Mod{\cate{Mod}}
+	\def\Ch{\cate{Ch}}
+	\def\ch{\Ch}
+
+\renewcommand{\P}{\boldsymbol{P}\!}
+
+\newcommand{\deduction}[4]{
+	\begin{array}{c}
+		#1 \to #2 \\ \hline
+		#3 \to #4
+	\end{array}
+}
+
+\def\pto{\looparrowright}

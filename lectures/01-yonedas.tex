@@ -1,0 +1,478 @@
+%!TEX root = ../main.tex
+\section{Yoneda structures on 2-categories}
+\subsection{Lift, extension, contraction, expansion}
+\begin{definition}
+  Let $B \xto{f} A \xot{g}C$ a cospan of 1-cells in $\clK$. A \emph{left
+lifting} of $f$ along $g$ consists of a pair $\langle\leeft_gf,\eta\rangle$
+(often denoted simply as $\leeft_gf$) initial among the commutative triangles
+like the one below:
+\[ \vcenter{\xymatrix@C=1.4cm{& C\ar[d]^g \\ B\ar[r]_f \ar@{.>}[ur]^{\leeft_gf}
+& \ar@{}[ul]|(.3){\Nearrow\eta} A}} \qquad \deduction{\leeft_gf}{h}{f}{gh}
+\] In other words, composition with $\eta \colon f \To g \circ \leeft_gf$
+determines a bijection $\bar\gamma \mapsto (g * \bar\gamma)\circ \eta$ between
+2-cells $\leeft_gf \xto{\bar\gamma} h$ and 2-cells $f \to gh$.
+\end{definition}
+\begin{remark}
+One can define \emph{right liftings} similarly, reversing only
+the direction of the 2-cell in the diagram above, and consequently the universal
+property, and \emph{left} and \emph{right extensions} reversing, respectively,
+only the directions of 1-cells or the direction of both 1- and 2-cells in the
+diagram above. It is then clear that left extensions in $\clK$ are left liftings
+in $\clK^\opp$, right liftings in $\clK$ are left liftings in $\clK^\co$, and
+right extensions are left liftings in $\clK^\coop$.
+
+The situation is conveniently depicted in the following array of universal
+objects:
+\[
+\begin{array}{|c|c|}\hline \xymatrix{A \ar@{}[dr]|(.3){\Swarrow\eta}\ar[d]_g
+\ar[r]^f& B \\ C \ar@{.>}[ur]_{\Lan_gf} & {\tiny \deduction{\Lan_gf}{h}{f}{hg}}}
+& \xymatrix{{\tiny \deduction{\Lift_gf}{h}{f}{gh}} & C\ar[d]^g \\ B\ar[r]_f
+\ar@{.>}[ur]^{\Lift_gf} & \ar@{}[ul]|(.3){\Nearrow\eta} A} \\ \hline
+%%%
+\xymatrix{A \ar@{}[dr]|(.3){\Nearrow\varepsilon}\ar[d]_g \ar[r]^f& B \\ C
+\ar@{.>}[ur]_{\Ran_gf} & {\tiny \deduction{hg}{f}{h}{\Ran_gf}}} &
+\xymatrix{{\tiny \deduction{h}{\Rift_gf}{gH}{f}} & C\ar[d]^g \\ B\ar[r]_f
+\ar@{.>}[ur]^{\Rift_gf} & \ar@{}[ul]|(.3){\Swarrow\varepsilon} A} \\ \hline
+\end{array}
+\]
+\end{remark}
+\begin{definition}
+There is an obvious notion of \emph{preservation} of a left lifting $\leeft_gf$
+(write it down abstracting a little bit from the definition of preservation of a
+co/limit) under the composition with a 1-cell $u$; we say that a left lifting is
+\emph{absolute} if it is preserved by \emph{every} $u$. Of course similar
+definitions apply to right liftings and left or right extensions.
+\end{definition}
+\subsubsection{Three standard results on lifts and extensions} Recall that we
+call
+\[ f : X \leftrightarrows Y : g
+\] a pair of \emph{adjoint} 1-cells if we are given a 2-cell $\epsilon : fg \To
+1$ and $\eta : 1\To gf$ satisfying the zig-zag identities $g*\varepsilon \circ
+\eta * g = 1_g$ and $\varepsilon * f \circ f * \eta = 1_f$. We denote this
+situation in the compact form $f \adjunct{\eta}{\varepsilon} g : X
+\leftrightarrows Y$.
+\begin{lemma}[The most intrinsic characterization of adjointness you could ever
+think of]\label{lem_adext1} The following conditions are equivalent:
+\begin{enumerate}
+	\item $f$ is the left lifting of the identity $1_A$ along $g : B\to A$ and
+this lifting is preserved by $g : B\to A$.
+	\item $f$ is the absolute left lifting of the identity $1_A$ along $g : B\to
+A$;
+	\item $f \adjunct{\eta}{\varepsilon} g : A \leftrightarrows B$;
+\end{enumerate}
+\end{lemma}
+\begin{proof} It is obvious that $(2)\To (1)$. We then prove that $(1)\To (3)$
+and $(3)\To (2)$.
+\begin{itemize}
+	\item The trick is to find $\epsilon : fg\To 1$ satisfying the zig-zag
+identities: since $\langle fg,\eta*g\rangle$ is the left lifting $\leeft_gg$,
+there is a unique such $\epsilon$ such that the equation $g * \epsilon \circ
+\eta *g = 1_g$ holds in the diagram below:
+	\begin{center}
+\begin{tikzcd}[column sep=huge,row sep=huge] &B \ar[d,"g"{name=g1}] \\ B \ar[r,
+"g"'{name=g2}] \ar[ur, bend left=60,-,"1"{name=codeps}]\ar[ur,
+"fg"'{name=domeps}] & A \ar[Rightarrow, from=domeps, to=codeps, shorten <=2mm,
+shorten >=2mm, "\epsilon"] \ar[Rightarrow, shorten <=2mm, shorten >=2mm,
+"\eta*g", near start, from=g2, to=g1]
+\end{tikzcd}
+	\end{center} This is one of the zig-zag identities testifying that $f
+\adjunct{\eta}{\epsilon}g$. The other zig-zag identity can be obtained from the
+chain of equalities
+	\[ \xymatrix@R=3mm{1_a \ar[r]^-\eta & gf \ar[r]^{gf * \eta} & gfgf \ar[r]^-{g
+* \varepsilon * f} & gf\\ 1_a \ar[r]^\eta & gf \ar[r]^-{\eta *gf} & gfgf
+\ar[r]^-{g *\epsilon * f} & gf\\ 1_a \ar[r]^\eta & gf \ar@{=}[rr] && gf }
+	\] but now $\varepsilon * f \circ f * \eta = 1_a$ by uniqueness ($\firstblank
+\circ \eta$ induces a bijection $\Nat(gf,gf)\cong \Nat(1,gf)$). This shows that
+$f \adjunct{\eta}{\epsilon}g$.
+	\item Assuming that $f \adjunct{\eta}{\epsilon}g$, we must show that $\langle
+f,\eta\rangle$ is an absolute extension. It is an extension, since given a
+functor $h : X \to A$, and ending the bijections $A(a, gha)\cong B(fa, ha)$ we
+get that
+	\[ \Nat(1,gh) \cong \Nat(f,h);
+	\] written explicitly, the bijection sends $\alpha : 1\To gh$ into its
+\emph{mate} $\tilde\alpha = \varepsilon * h \circ F * \alpha : f\To fgh\To h$,
+and the uniqueness is given by the bijectivity of $\alpha \mapsto \tilde\alpha$.
+A similar argument shows that this lifting is absolute, as
+	\begin{align*} \Nat(h,gk) &\cong \int_x A(hx, gkx)\\ &\cong \int_x B(fhx,kx)\\
+&\cong \Nat(fh,k);
+	\end{align*} this shows that $\langle fh,\eta *h\rangle $ is $\langle
+\leeft_gh,\eta*h\rangle$. \qedhere
+\end{itemize}
+\end{proof}
+\begin{lemma}[A pasting lemma for left extensions]\label{lem_adext2} Given the
+diagram of natural transformations between functors
+\[
+\begin{tikzcd} A \ar[r,"f"] \ar[d, "h"'{name=h}] & B \ar[from=h,Rightarrow,
+shorten <=2mm, shorten >=2mm, "\eta"']\ar[dl,"k", bend left=45]\ar[r, "g"] & C
+\ar[dll,"n",bend left=50]\\ D \ar[Rightarrow, urr,shorten <=4mm, shorten >=4mm,
+"\beta"', pos=.6]&&
+\end{tikzcd}
+\] assume that the external triangle, plus the left triangle are left
+extensions, \ie there are 2-cells $\eta : h \to kf$ such that $k=\Lan_fh$ and
+$\beta : h \to ngf$ such that $n=\Lan_{gf}h$. Then the right triangle is a left
+extension, meaning that
+\begin{itemize}
+	\item There is a unique $\hat \beta : k \to ng$ such that $\beta = \hat \beta
+* f \circ \eta$;
+	\item Such $\hat\beta$ makes the pair $(n,\hat\beta)$ a left extension of $k$
+along $g$.
+\end{itemize}
+\end{lemma}
+\begin{proof} Exercise. Use the universal properties you already have to supply
+the additional one. (Additional question: is it still true for absolute extensions?)
+\end{proof}
+\begin{definition}[relative adjunction] Let $f : X \to Y $, $j : X \to C$, and
+$g : Y \to C$ be three functors; we say that $f$ is a \emph{$j$-relative left
+adjoint} to $g$, and we write $f\adjunct{\eta[j]}{} g$, if there is a natural
+isomorphism
+\[ Y(fx,y) \cong X(jx,gy).
+\]
+\end{definition}
+\begin{remark} It is a matter of checking universal properties to prove that
+$f\adjunct{\eta[j]}{}g$ iff $g$ exhibits $\RIFT_fj$. This gives a formal
+characterization of relative adjoints generalizing Lemma \ref{lem_adext1}.
+\end{remark} It is of course possible to define a relative \emph{right} adjoint:
+given $C \xto{g}X \xto{f}Y$ and $j : C \to Y, $ we write that
+$f\adjunct{}{[j]\varepsilon} g$ if $Y(fx,jc)\cong X(x,gc)$. Then, $f
+\adjunct{}{[j]\varepsilon} g$ if and only if $f\cong \LIFT_gj$
+\begin{remark} The definition fo relative adjunction is eminently asymmetric:
+the most important difference is that the two functors do not determine each
+other any more, as it is only true that if $f\adjunct{}{[j]\varepsilon} g$ then
+$g$ determines $f$ uniquely, and not viceversa (immediate in view of the formal
+characterization above).
+\end{remark} Apart from this, and keeping in mind this inevitable asymmetry,
+pretty much all the theory of adjoint functors can be relativized:
+\begin{itemize}
+	\item Relative adjunctions have units \emph{or} counits, depending on whether
+they are left or right;
+	\item relative adjunctions generate \emph{relative monads} in the sense of
+\cite{};
+	\item if $f \adjunct{\eta[j]}{}g$, and $j\adjunct{\tilde\eta}{} j_r$ then $f
+\adjunct{j_r*\eta'[j_rj]}{}j_r g$, with $\eta'$ a pasting of $\eta,\tilde\eta$.
+\end{itemize}
+\subsection{Yoneda structures: presenting the axioms} The idea in this section
+is to present the bare axioms and then show why these are sensible abstractions
+of `trivially true' properties of the 2-category $\Cat$. The analogy here is
+with the motivation for Giraud axioms characterizing a Grothendieck topos, or
+with the categorical properties of $\Set$ that characterize (a weak version of)
+it in ETCS. Then, we discuss the consequences of the axiom we single out showing
+the most we can in a purely formal way.
+
+We establish the following notation:
+\begin{itemize}
+	\item $\clK$ is a 2-category, fixed once and for all;
+	\item $\textsf{Adm}(A,B) \subseteq \clK(A,B)$ is a full subcategory of
+``admissible'' 1-cells, which is moreover a \emph{right ideal}, meaning that the
+composition map restricted to admissible 1-cells gives
+	\[ \textsf{Adm}(A,B) \times \clK(X,A) \to \textsf{Adm}(X,B).
+	\] We call admissible an object $A$ such that $1_A \in \textsf{Adm}(A,A)$;
+notice that this entails that every 1-cell with admissible codomain is itself
+admissible.
+	\item we assume that the following structure can be found on $\clK$:
+	\begin{enumerate}
+		\item for each admissible object $A\in\clK$ we can find an admissible 1-cell
+$\yon_A : A \to \P A$ called a \emph{Yoneda arrow};
+		\item for each $f : A \to B$ admissible 1-cell with admissible domain, we
+can find a 2-cell
+		\[ \xymatrix@R=1.4cm@C=1.4cm{ A \ar[d]_f
+\drtwocell<\omit>{<3>\chi^f}\ar[dr]^{\yon_A}& \\ B \ar[r]_-{B(f,1)}& \P A }
+		\]
+	\end{enumerate}
+\end{itemize}
+\begin{axiom} The pair $\langle B(f,1),\chi^f\rangle$ exhibits $\lan_f \yon_A$.
+\end{axiom} The validity of this axiom in $\Cat$ justifies the notation: indeed,
+in $\Cat$ the functor $B(f,1)$ amounts precisely to the functor $\lambda
+b.\lambda a.B(fa,b)$. Of course, a functor is admissible if it has small domain,
+and $\P A$ is the category $[A^\opp, \Set]$ of presheaves on $A$.
+
+The proof that $B(f,1)\cong \lan_f \yon_A$, here and elsewhere, will be the
+result of a nifty coend-juggling: we have that
+\begin{align*} \lan_f \yon_A(b) & \displaystyle \cong \int^a B(fa,b)\cdot
+\yon_A(a)\\ & \cong \displaystyle \int^a B(Fa,b)\times A(\firstblank,a)\\ &
+\cong B(f\firstblank,b).
+\end{align*} Axiom 1 entails that the correspondence $B(f,1)$ is, in a suitable
+sense, functorial, as a map
+\[ \xymatrix{\textsf{Adm}(A,B)^\opp \times \clK(X,B) \ar[r] & \clK(X, \P A)}
+\] Indeed, given a 2-cell $\alpha : f'\To f$ between admissible 1-cells in
+$\clK$, there is a unique $\bar\alpha : B(f,1)\To B(f',1)$ such that the diagram
+\[ \vcenter{\xymatrix@R=1.4cm@C=1.4cm{ A\ar@{}[dr]|(.3){\Swarrow\chi^f} \ar[d]_f
+\ar[r]^{\yon_A}& \P A\\ B\urlowertwocell^{}_{\qquad
+B(f',1)}{c}\ar[ur]|(.7){B(f,1)} & }} {\quad \Huge =\quad }
+\vcenter{\xymatrix@R=1.4cm@C=1.4cm{ A\ar@{}[dr]|{\Swarrow\chi^f}
+\ar[r]^{\yon_A}\dtwocell^{f'}_f{\alpha} & \P A\\ B\ar@/_1.5pc/[ur]_{B(f',1)} &
+}}
+\] commutes for a single 2-cell induced by the universal property of $\lan_f
+\yon_A$, and such 2-cell can quite rightly be called $B(\alpha,1)$ (notice that
+the pasting $B(f',1)*\alpha \circ \chi^{f'}$ of the right square exists only if
+$\alpha : f'\To f$, so $\lambda\alpha.B(\alpha,1)$ must be contravariant
+whatever its definition).
+
+Instead, given a 2-cell $\xymatrix{X \rtwocell^b_{b'}{\beta}& B}$, we define
+\[ \xymatrix{ X \rrtwocell^{B(f,b)}_{B(f',b')}{B(\alpha,\beta)}&& \P A & {\huge
+=} & X\rrtwocell^b_{b'}{\beta} && B\rrtwocell^{B(f,1)}_{B(f',1)}{\qquad
+B(\alpha,1)} && \P A }
+\]
+\begin{axiom} The pair $\langle f,\chi^f\rangle$ exhibits
+$\leeft_{B(f,1)}\yon_A$.
+\end{axiom} The validity of this axiom in $\Cat$ is again a game of coend
+calculus: if we call $N_f = \lan_f\yon_A=B(f,1)$ for short, we have
+$\leeft_{N_f}\dashv N_{f,*}$, where $N_{f,*}\colon g\mapsto N_f\circ g$ is the
+`direct image' functor; then we have
+\begin{align*} 
+\Nat\big( \yon_A, N_f\circ g \big) &\cong \int_{a'}[A^\opp,\Set]\big(\yon_A{a'}, N_f\circ g(a')\big)\\ 
+& \cong \int_{a'}[A^\opp,\Set]\big( \yon_A{a'}, B(f\firstblank,ga')\big)\\ 
+&\cong \int_{a'}B(fa',ga')\\ &\cong \Nat(f,g)
+\end{align*}
+\begin{axiom} Given a pair of composable 1-cells $A \xto{f} B\xto{g} C$, the
+pasting of 2-cells
+\[
+\begin{tikzcd}[column sep=large, row sep=large] A\ar[d, "f"']\ar[rr,
+"\yon_A"{name=yonA}] && \P A\\ B \ar[r, "\yon_B"{name=yonB}]\ar[d, "g"'] & \P
+B\ar[ur, "\P f"']\\ C\ar[ur, "{C(g,1)}"'] \ar[from=yonA, to=yonB, shorten >=2mm,
+shorten <=4mm, Rightarrow, "\chi^{\yon_B f}"] \ar[from=yonB, shorten >=4mm,
+shorten <=4mm, Rightarrow, "\chi^g"]
+\end{tikzcd}
+\] exhibits $\lan_{gf}\yon_A = C(gf,1)$, and the pair $\langle 1_{\P A},
+1_{\yon_A}\rangle$ exhibits $\lan_{\yon_A}\yon_A$.
+\end{axiom} The hidden meaning of this axiom is that $\P$ is a pseudofunctor
+$\clK^\coop \to \clK$.
+
+Let's make this evident: given a pair of composable the universal property of
+$\chi^{gf}$ entails that there is a unique 2-cell $\theta^{gf}$ filling the
+diagram
+\[
+\begin{tikzcd}[column sep=huge, row sep=huge] A \ar[dashed,Rightarrow,dr,
+shorten <=1.8cm, "\theta^{gf}", pos=.9]\ar[r, "\yon_A"{name=yonA}]\ar[d, "f"']&
+\P A \\ B \ar[d, "g"']& \P B\ar[u, "\P f"'] \\ C \ar[r, "\yon_C"'] \ar[ur,
+""'{name=Cg1}]\ar[uur] \ar[from=yonA, Rightarrow, shorten <=7mm, shorten
+>=1.5cm, "\chi^{gf}"{name=node}, pos=.25] & \P C\ar[u, "\P g"'] \ar[from=Cg1,
+Rightarrow, shorten >=1mm]
+\end{tikzcd}
+\] Axiom 3 is equivalent to the request that this arrow is invertible (exercise:
+draw the right diagram), and this yields that the above diagram has the same
+universal property of
+\[ \xymatrix{ A \ar@{}[dr]|\Sarrow \ar[r]^{\yon_A}\ar[d]_{gf}& \P A\\ C
+\ar[r]_{\yon_C}& \P C\ar[u]_{\P(gf)} }
+\] which in turn entails that there is a unique, and invertible, 2-cell $\P(gf)
+\To \P f \circ \P g$. This is of course the first part of the structure of
+pseudofunctor on $\P$; the remaining structure is given by the request that
+$\langle 1_{\P A}, 1_{\yon_A}\rangle$ exhibits $\lan_{\yon_A}\yon_A$.
+\begin{remark}
+As this might appear quite enigmatic, let's recall that we call \emph{dense} a 1-cell
+$k$ with the property that $\lan_kk\cong 1$; this allows us to rephrase the second
+part of axiom 3 saying that `the Yoneda embedding is dense'. This is in fact a
+characterizing property, as the Yoneda lemma is essentially a statement about
+the inclusion $A \to \P A$ being able to ``generate all $\P A$ under colimits''. As
+the universal property of $\P(1_A)$, defined above, entails that there is a
+unique 2-cell $\iota_A : \P(1_A) \To 1_{\P A}$, axiom 3 is equivalent to the
+request that $\iota_A$ is invertible (and natural in $A$). This renders $\P$ a
+pseudo-functor, as claimed above.
+\end{remark}
+All these remarks are of course trivial in $\Cat$, since the functoriality of
+the correspondence $A \mapsto \widehat A$ can be proved directly. Nevertheless,
+axiom 3 is still telling us something about a `reduction rule' for composition
+of Kan extensions: indeed, it is possible to prove that (in the same notation of
+axiom 3)
+\[ \theta_{gf} : \lan_{gf}\yon_A \cong \lan_{\yon_B f}\yon_A \circ \lan_g \yon_B
+\] There is an additional axiom:
+\begin{axiom} Let $\xymatrix{B \rtwocell^{B(f,1)}_g{\sigma}& \P A}$ be a 2-cell;
+if it has the property that the pasting
+\[ \xymatrix{ A \ar@{}[dr]|(.3)\Swarrow\ar[r]^{\yon_A}\ar[d]_f & \P A \\
+B\ar[ur] \urlowertwocell_g{\sigma} & }
+\] exhibits $\leeft_g\yon_A$, then $\sigma$ is invertible.
+\end{axiom} It must be noted that this axiom is mainly useful to make some
+statements and proofs look better: there are reasons not to include it in the
+definition of a bare Yoneda structure; it can be proved that $1,2,4\To 3$ so
+that we can call \emph{nice Yoneda structures} those that satisfy $1,2$, and
+$4$.
+
+We now concentrate on a few examples that make evident how category theory can
+be re-enacted in a 2-category with a Yoneda structure. In a nice Yoneda
+structure, we have a nicer characterization of adjoints and a more intuitive
+analogue of fully faithful 1-cells:
+\begin{itemize}
+	\item If axiom 4 holds, then we recover the characterization of relative
+adjoints below (see \ref{reladjoints}; in general, only one implication holds)
+in terms of left liftings: given 1-cells $f : A\to B, g : B\to C, j : A \to C$
+we have $f\cong \leeft_gj$ if and only if $f \adjunct{\eta[j]}{}g$, \ie if and
+only if $B(f,1)\cong C(j,g)$.
+	\item if axiom 4 holds, then a 1-cell $f$ is fully faithful if
+and only if the \emph{functor} $\clK(X,f)$ is fully faithful for each $X$,
+naturally in $X$.
+\end{itemize}
+\subsection{Yoneda structures: theorems} A great deal of category theory can be
+developed in a category $\clK$ endowed with a Yoneda structure. We collect here
+a few results coming from \cite{street1978yoneda}.
+\begin{theorem}[on relative adjoints]\label{reladjoints} Suppose $j : A \to C, f
+: A\to B, g : B \to C$ are 1-cells in $\clK$ forming a relative adjunction
+$f \adjunct{\eta[j]}{}g$, and $A,f,j$ are admissible. Then
+the equality of 2-cells
+\[ \vcenter{\xymatrix@!=8mm{ &A\ar@{}[d]|(.4){\Sarrow\,\chi^f}\ar[dl]_f
+\ar[dr]^{\yon_A}&\\ B\rrtwocell^{B(f,1)}_{C(j,1)\circ g}{\pi} && \P A }} \qquad {\huge
+=} \qquad \vcenter{\xymatrix@!=8mm{ \ar@{}[dr]|(.7){\Swarrow\eta}& A \ar[d]^j
+\ar[dl]_f \ar[dr]^{\yon_A} & \ar@{}[dl]|(.7){\Swarrow\chi^j}\\ B \ar[r]_g &
+C\ar[r]_{C(j,1)} & \P A }}
+\]
+holds since the left 2-cell defines a $\yon_A \To C(j,g)\circ f$, that (by the universal property of
+$\chi^f$) must be of the form $(\pi * f)\circ \chi^f$ for a unique $\pi :
+B(f,1)\To C(j,g)$. This determines a bijection
+\[
+\begin{array}{c} \pi : B(f,1) \To C(j,t)\\ \hline \eta :  j \To gf
+\end{array}
+\] If $\pi$ is invertible then the corresponding $\eta$ exhibits $\LIFT_gj$.
+\end{theorem}
+\begin{theorem}[on adjoints] Take $f : A \leftrightarrows B : g$ such that $A,f$
+are admissible. Given a 2-cell $\eta : 1 \to gf$, the universal property of
+$\yon_A * \eta$ induces a bijection between these $\eta$'s and 2-cells $\pi :
+B(f,1)\To A(1,u)$:
+\[ 
+\vcenter{\xymatrix@R=1.3cm@C=1.3cm{
+	A \ar@{}[dr]|{\Swarrow\yon*\eta}\ar[r]^{\yon_A}\ar[d]_f& \P A\\
+	B\ar@/_1.5pc/[ur]_{A(1,u)} &
+}}
+\qquad
+{\huge =}
+\qquad
+\vcenter{\xymatrix@R=1.3cm@C=1.3cm{
+	A \ar@{}[dr]|(.65){\pi\Searrow}\ar[r]^{\yon_A}\ar[d]_f& \P A \\
+	B\ar@/_1.5pc/[ur]_{A(1,u)}\ar[ur]|{B(f,1)} &
+}}
+\] 
+Then $\eta$ is a unit of an adjunction $f\adjunct{\eta}{}g$ if and only if
+$\pi$ is invertible. Moreover, if $f\adjunct{\eta}{}g$ then for any $X\in\clK$,
+and $a : X \to A, b : X \to B$ 1-cells, wit $X,a,f\circ a$ admissible we have
+the ``pointset'' characterization of adjoints $A(a,gb)\cong B(fa,b)$.
+\end{theorem}
+\begin{definition}[weighted colimit in formal category theory] Given admissible
+$A, f : A\to B$ and $M, j : M \to \P A$ we define a $j$-indexed colimit (or
+$j$-weighted colimit) for $f$, and write $j\otimes f : M \to B$ for a
+$j$-relative left adjoint of $B(f,1)$. This means that we can write a
+``tensor-hom''-like adjunction
+\[ B(j\otimes f,1)\cong \P A(j, B(f,1))
+\]
+\end{definition}
+\begin{remark} Notice that \athm\ref{reladjoints} above characterizes $j\otimes f$ as an
+absolute left lifting of $j$ along $B(f,1)$; the converse is in general not true
+(it requires axiom 4), and then this left extension deserves the name of
+\emph{weak} $j$-indexed colimit.
+\end{remark} In view of the above remark, it is obvious what does it mean for a
+1-cell $h$ to \emph{preserve} a $j$-indexed colimit $j\otimes f$. We have the
+following
+\begin{theorem}\label{prezerve} A left adjoint 1-cell $l : A \to B$ preserves
+all (weak) $j$-indexed colimits that exist in $\clK$ and can be composed with
+$l$.
+\end{theorem}
+\begin{proof} The proof is notationally tautological (and shows the power of
+  endowing a 2-category with a Yoneda structure) in view of the definition
+for the left extension $X(u,1)$ and the composition $X(1,u)=\yon_X u$: assume
+$l\adjunct{\eta}{}r$ is an adjunction with $l : B \to X$, and that the diagram
+\[ \xymatrix{ X\ar[r]^{j\otimes f}\ar[d]_j & B \ar@/^1pc/[dl]^{B(f,1)} \\ \P A &
+\ultwocell<\omit>{\eta} }
+\] exhibiting $j\otimes f$ is given; then
+\begin{align*}
+  \P A(j, X(lf,1)) &\cong \P A(j, B(f,r))\\
+                   &= \P A(j, B(f,1))\circ r\\
+                   &\cong B(j\otimes f,1)\circ r\\
+                   &= B(j\otimes f,r)\\
+                   &\cong X(l(j\otimes f),1)
+\end{align*} thus exhibiting $j\otimes lf$.
+\end{proof}
+\begin{theorem}\label{assoc} Suppose $M,A,j : M\to \P A, f : A \to B$ are
+admissible. If $j\otimes f$ exists and if additional admissible $N, i : N \to \P
+M$ are such that $i\otimes j$ exists, then there is an associativity isomorphism
+\[ i\otimes (j\otimes f)\cong (i\otimes j)\otimes f.
+\]
+\end{theorem} The following theorem is what can be called ``ninja Yoneda
+lemma'': it amounts to the statement that tensoring with a representable acts
+like an evaluation.
+\begin{theorem}[the ninja yoneda lemma]\label{ninja} For admissible $A, f : A
+\to B$ and $X, a : X \to A$ there is an isomorphism
+\[ A(1,a)\otimes f \cong f \circ a
+\]
+\end{theorem}
+\subsection{Yoneda structures: examples} Here we collect a few examples of
+Yoneda structures for different choices of $\clK$:
+\begin{enumerate}
+	\item the 2-category $\Cat$ has a Yoneda structure where $\P A =
+[A^\opp,\Set]$.
+	\item the 2-category $\clV$-$\Cat$ of categories enriched over a base $\clV$
+has a Yoneda structure where $\P A = [A^\opp,\clV]$ (you basically pretend your
+proof lives in $\Cat = \Set$-$\Cat$).
+	\item the 2-category $\Cat(\clK)$ of internal categories in a finitely
+complete $\clK$ (like for example a topos) has a Yoneda structure whose
+existence we sketch in Exercise \ref{profu}.
+	\item If $\mathcal K$ has a Yoneda structure and $\mathcal C$ is a small
+2-category, $\text{Psd}[\mathcal{C}^\opp, \mathcal K]$ has an \emph{objectwise}
+Yoneda structure.
+\end{enumerate}
+\subsection{Selected exercises} This subsection collects a few exercises; the
+ones labelled with a {\faCoffee} symbol are to be done with patience, a
+comfortable spot in the library and a cup of good coffee (warning: American
+coffee might be an insufficient adjuvant); the ones labelled with a danger
+symbol {\faExclamationTriangle} are meant to be boring technicalities no one
+ever checks, or extremely difficult exercises.
+\begin{exercise} Dualize the statement of Lemma \ref{lem_adext1} and
+\ref{lem_adext2}.
+\end{exercise}
+\begin{exercise} Let
+\[
+\begin{tikzcd} (f/g)\ar[r, "p"]\ar[d, "q"'] & Y \ar[Rightarrow,dl, shorten
+<=4mm, shorten >=4mm,"\theta"]\ar[d, "g"]\\ X \ar[r, "f"']& Z
+\end{tikzcd}
+\] be a comma object. Is it true that $\langle p, \theta\rangle$ exhibits
+$\rift_g fq$?
+\end{exercise}
+\begin{exercise} Prove that in $\Cat$ there is an isomorphism
+\[ \lan_{\yon_B \circ f} \yon_A \cong \lan_{\yon_B}B(f,1)
+\] for each $f : A \to B$ a functor between small categories, and the Yoneda
+embeddings $\yon_A : A \to \P A$, $\yon_B : B \to \P B$.
+\end{exercise}
+\begin{exercise} Prove axiom 3 in $\Cat$; write explicitly the isomorphism
+$\theta_{fg}$ of axiom 3.
+\end{exercise}
+\begin{exercise}[\faCoffee] Prove that there is a Yoneda structure on the
+2-category of posets (objects: posets seen as categories; 1-cells: monotone
+functions; 2-cells: the partial order relation on the set $\cate{Pos}(X,Y)$ of
+monotone functions).
+\begin{itemize}
+	\item Describe explicitly $\yon_A : A \to \P A$;
+	\item Prove directly axioms 1 and 2;
+	\item Prove axiom 3 pretending to ignore that $\P$ is blatanly a functor, \ie
+prove directly that $\theta_{fg}$ and $\iota_A$ are defined and invertible
+(=identities). Does axiom 4 hold?
+\end{itemize} Do this without using the description of $\Pos$
+\end{exercise}
+\begin{exercise}[\faExclamationTriangle] Prove that the isomorphism $\alpha$
+that render $\P$ a pseudo-functor satisfy the commutativity
+\[ \xymatrix{ P(hgf)\ar[d]\ar[rr] && P(gf)Ph\ar[d]\\ Pf P(hg)\ar[rr] && **[r]
+Pf(Pg Ph) = (Pf Pg)Ph }
+\] (note that this is both boring and difficult: you cna only use the universal
+property).
+\end{exercise}
+\begin{exercise} Prove \ref{assoc} and \ref{ninja} in a similar -formal- way of
+\ref{prezerve}.
+\end{exercise}
+\begin{exercise}[\faExclamationTriangle]\label{profu} Let $\clE$ be a finitely
+complete category, and $\clK = \Cat(\clE)$ the 2-category of categories internal
+to $\clE$. Recall the definition of an internal profunctor \cite[8.2.1,
+8.4.3]{Bor1}; prove that there is an equivalence
+\[ \cate{Prof}_{\clE}(A,B) \cong \cate{Prof}_{\clE}(1,A^\opp\times B)
+\] Prove that this correspondence is natural in $A,B$ (which covariance type is
+it?). We define
+\begin{itemize}
+	\item an \emph{internal full subcategory} of $\clE$ an object $\cate{S}$ of
+$\clK$ with an internal profunctor $s : 1 \pto \cate{S}$ inducing a fully
+faithful functor
+	\[\clK(X,\cate{S}) \to \cate{Prof}_{\clE}(1,B)\] via precomposition.
+	\item a 1-cell $f : A\to B$ in $\clK$ \emph{admissible} when the profunctor
+corresponding to $(f/B)$ lies in the essential image of the functor
+$\clK(A^\opp\times B,\cate{S}) \to \cate{Prof}_{\clE}(1,A^\opp\times B)$. call
+$f^*$ this (unique) 1-cell $A^\opp\times B \to \cate{S}$.
+\end{itemize} Prove that $\clK$ has a Yoneda structure when $B(f,1) :=
+\widehat{f^*} : B \to [A^\opp,\cate{S}]$ is the mate of $f^*$, and $\P A :=
+[A^\opp,\cate{S}]$.
+
+What happens when $\clE$ is an elementary topos and $\cate{S}=\Omega_{\clE}$?
+What happens when $\clE$ is a Grothendieck topos and $\cate S = \cate{N}$ is the
+natural number object?.
+\end{exercise}

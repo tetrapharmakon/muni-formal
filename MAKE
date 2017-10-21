@@ -1,0 +1,3 @@
+latexmk -pdf main.tex
+latexmk -c
+mv main.pdf ${PWD##*/}.pdf
